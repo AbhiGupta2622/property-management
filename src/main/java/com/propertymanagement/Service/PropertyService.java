@@ -1,7 +1,6 @@
 package com.propertymanagement.Service;
 
-import com.propertymanagement.Model.PropertyDto;
-import com.propertymanagement.Model.PropertyEntity;
+import com.propertymanagement.DTO.PropertyDto;
 
 import java.util.List;
 

@@ -1,9 +1,10 @@
-package com.propertymanagement.Service;
+package com.propertymanagement.Service.Impl;
 
 import com.propertymanagement.Converter.PropertyConverter;
-import com.propertymanagement.Model.PropertyDto;
+import com.propertymanagement.DTO.PropertyDto;
 import com.propertymanagement.Model.PropertyEntity;
 import com.propertymanagement.Repository.PropertyRepo;
+import com.propertymanagement.Service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class PropertyImpl implements PropertyService{
+public class PropertyImpl implements PropertyService {
 
     @Autowired
     public PropertyRepo propertyRepo;

@@ -1,16 +1,13 @@
 package com.propertymanagement.Controller;
 
-import com.propertymanagement.Model.PropertyDto;
-import com.propertymanagement.Model.PropertyEntity;
+import com.propertymanagement.DTO.PropertyDto;
 import com.propertymanagement.Service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.support.Repositories;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PropertyController {
