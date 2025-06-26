@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Define a log file location using a property -->
+    <property name="HOME_LOG" value="logs/app.log"/>
+
+    <!-- File appender: creates rolling log files -->
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${HOME_LOG}</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Daily rolling with size limit -->
+            <fileNamePattern>logs/archived/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>20GB</totalSizeCap> <!-- Keep total logs up to 20GB -->
+            <maxHistory>60</maxHistory> <!-- Keep logs for 60 days -->
+        </rollingPolicy>
+
+        <encoder>
+            <!-- Pattern: timestamp log level logger name message -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Console appender: for local/dev debugging -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Example pattern with highlight -->
+            <pattern>%d{dd-MM-YYYY HH:mm:ss.SSS} [%thread] %highlight(%-5level) %logger{36}.%M - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Logging levels and appenders based on Spring profile -->
+
+    <!-- Local profile: show DEBUG logs on console -->
+    <springProfile name="local">
+        <root level="DEBUG">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <!-- Dev profile: write INFO level logs to file -->
+    <springProfile name="dev">
+        <root level="INFO">
+            <appender-ref ref="FILE-ROLLING" />
+        </root>
+    </springProfile>
+
+    <!-- Test, acceptance, production profile: log WARN and above to file -->
+    <springProfile name="test | acc | prod">
+        <root level="WARN">
+            <appender-ref ref="FILE-ROLLING" />
+        </root>
+    </springProfile>
+
+</configuration>
